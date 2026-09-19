@@ -72,7 +72,7 @@ ul.days { list-style:none; margin:0; padding:0; }
 ul.days li { padding:13px 0; border-bottom:1px solid var(--line); }
 ul.days a { text-decoration:none; font-weight:600; }
 ul.days .peek { color:var(--soft); font-size:14px; font-weight:400; }
-ul.days li.today { border-left:3px solid var(--accent); padding-left:10px; }
+ul.days li.today { border-left:3px solid var(--accent); padding-left:10px; scroll-margin-top:12px; }
 ul.days li.today a::after { content:" 오늘"; color:var(--accent); font-size:12px; vertical-align:2px; }
 footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
          font-size:13px; color:var(--soft); }

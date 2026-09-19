@@ -12,9 +12,9 @@
 <ul class="days"><li><a href="2026-09-29.html">2026년 9월 29일</a><div class="peek">되뇌다 · 어룽지다 · 부질없다 · 해사하다 · 숙연</div></li><li><a href="2026-09-28.html">2026년 9월 28일</a><div class="peek">자욱하다 · 옹이 · 곰비임비 · 유현 · 참담</div></li><li><a href="2026-09-27.html">2026년 9월 27일</a><div class="peek">에다 · 하릴없다 · 사부작사부작 · 신산 · 영락</div></li><li><a href="2026-09-26.html">2026년 9월 26일</a><div class="peek">도스르다 · 안다미로 · 뭉근하다 · 완곡 · 침잠</div></li><li><a href="2026-09-25.html">2026년 9월 25일</a><div class="peek">시나브로 · 옴팡지다 · 서리서리 · 창연 · 부박</div></li><li><a href="2026-09-24.html">2026년 9월 24일</a><div class="peek">사뭇 · 짐짓 · 뉘엿뉘엿 · 황망 · 적막</div></li><li><a href="2026-09-23.html">2026년 9월 23일</a><div class="peek">함초롬하다 · 여울 · 결곡하다 · 망연 · 고적</div></li><li><a href="2026-09-22.html">2026년 9월 22일</a><div class="peek">스러지다 · 어스름 · 잔망스럽다 · 초연 · 물색없다</div></li><li><a href="2026-09-21.html">2026년 9월 21일</a><div class="peek">흐드러지다 · 헛헛하다 · 곡진 · 유장 · 가뭇없다</div></li><li><a href="2026-09-20.html">2026년 9월 20일</a><div class="peek">을씨년스럽다 · 무람없다 · 형형 · 저어하다 · 애오라지</div></li><li><a href="2026-09-19.html">2026년 9월 19일</a><div class="peek">미쁘다 · 적요 · 옹골지다 · 남루 · 자맥질</div></li><li><a href="2026-09-18.html">2026년 9월 18일</a><div class="peek">명징 · 갈무리 · 소슬 · 여위다 · 회한</div></li><li><a href="2026-09-17.html">2026년 9월 17일</a><div class="peek">서슴다 · 우수 · 사위다 · 청승맞다 · 뇌리</div></li><li><a href="2026-09-16.html">2026년 9월 16일</a><div class="peek">아스라이 · 스산하다 · 애면글면 · 처연 · 정한</div></li></ul>
 <footer>획순 데이터: <a href="https://github.com/KanjiVG/kanjivg">KanjiVG</a> (CC BY-SA 3.0)</footer>
 </div>
-<!-- 오늘 줄은 볼 때 찾아 맨 위로 — 목록을 다시 안 만든 날에도 맞게 -->
+<!-- 날짜 순서는 그대로 두고, 오늘 줄이 화면 맨 위에 오도록 스크롤만 한다 (위=내일, 아래=어제) -->
 <script>
 const t = document.querySelector(`.days a[href="${new Date().toLocaleDateString('sv')}.html"]`)?.closest('li');
-if (t) { t.classList.add('today'); t.parentNode.prepend(t); }
+if (t) { t.classList.add('today'); t.scrollIntoView(); }
 </script>
 </body></html>
