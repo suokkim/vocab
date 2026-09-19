@@ -1,0 +1,69 @@
+/* 어휘 사이트 공통 스타일 */
+:root { color-scheme: light dark; --ink:#1a1a1a; --bg:#fbfbf9; --line:#ddd9d0;
+        --soft:#6b665c; --faint:#cac6bb; --accent:#c0392b; --card:#fff; }
+@media (prefers-color-scheme: dark) {
+  :root { --ink:#e8e6e1; --bg:#141418; --line:#33333c; --soft:#9a978f;
+          --faint:#4a4a55; --accent:#ff6f5e; --card:#1c1c22; }
+}
+* { box-sizing: border-box; }
+body { margin:0; padding:28px 18px 64px; background:var(--bg); color:var(--ink);
+       font:16px/1.7 -apple-system, "Apple SD Gothic Neo", sans-serif; }
+.page { max-width: 760px; margin: 0 auto; }
+a { color: inherit; }
+header { margin-bottom: 30px; }
+h1 { font-size:24px; font-weight:650; margin:0 0 2px; letter-spacing:-.01em; }
+.crumb { font-size:14px; color:var(--soft); }
+h2 { font-size:15px; font-weight:650; margin:38px 0 14px; padding-bottom:7px;
+     border-bottom:1px solid var(--line); color:var(--soft);
+     text-transform:none; letter-spacing:.02em; }
+
+/* 단어 */
+ol.words { list-style:none; margin:0; padding:0; }
+ol.words li { padding:14px 0; border-bottom:1px solid var(--line); }
+ol.words li:last-child { border-bottom:0; }
+.w { font-size:19px; font-weight:600; }
+.w .hz { color:var(--soft); font-weight:400; font-size:16px; }
+.mean { margin-top:1px; }
+.ex { color:var(--soft); font-size:15px; margin-top:3px; }
+
+/* 한자 */
+.hanja { margin-bottom:26px; }
+.hanja .head { font-size:15px; color:var(--soft); margin-bottom:10px; }
+.card { border:1px solid var(--line); border-radius:14px; background:var(--card);
+        padding:16px 18px; margin-bottom:14px; }
+.top { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+.kanji { width:128px; height:128px; flex:0 0 auto;
+         border:1px solid var(--line); border-radius:10px; background:var(--bg); }
+.kanji path.s { fill:none; stroke:var(--ink); stroke-width:5;
+                stroke-linecap:round; stroke-linejoin:round; }
+.meta .ch { font-size:30px; line-height:1.2; }
+.meta .desc { font-size:14px; color:var(--soft); }
+.meta .cnt { font-size:13px; color:var(--soft); opacity:.75; margin-top:2px; }
+button { margin-top:9px; font:inherit; font-size:13px; padding:4px 13px;
+         border:1px solid var(--line); border-radius:999px;
+         background:transparent; color:inherit; cursor:pointer; }
+button:hover { background:var(--line); }
+
+/* 획별 칸 — 한 칸이 한 획 */
+.steps { display:flex; flex-wrap:wrap; gap:7px; margin-top:15px;
+         padding-top:13px; border-top:1px dashed var(--line); }
+.step { position:relative; width:58px; height:58px; border:1px solid var(--line);
+        border-radius:8px; background:var(--bg); }
+.step svg { width:100%; height:100%; display:block; }
+.step path.done { fill:none; stroke:var(--faint); stroke-width:5;
+                  stroke-linecap:round; stroke-linejoin:round; }
+.step path.cur { fill:none; stroke:var(--accent); stroke-width:6.5;
+                 stroke-linecap:round; stroke-linejoin:round; }
+.num { position:absolute; top:1px; left:5px; font-size:11px; color:var(--soft);
+       font-variant-numeric:tabular-nums; }
+
+/* 복습·목차 */
+.review div { margin-bottom:4px; }
+.review b { font-weight:600; }
+ul.days { list-style:none; margin:0; padding:0; }
+ul.days li { padding:13px 0; border-bottom:1px solid var(--line); }
+ul.days a { text-decoration:none; font-weight:600; }
+ul.days .peek { color:var(--soft); font-size:14px; font-weight:400; }
+footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
+         font-size:13px; color:var(--soft); }
+@media print { button, footer { display:none; } }
