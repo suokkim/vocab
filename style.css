@@ -34,8 +34,9 @@ ol.words li:last-child { border-bottom:0; }
 .top { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
 .kanji { width:128px; height:128px; flex:0 0 auto;
          border:1px solid var(--line); border-radius:10px; background:var(--bg); }
-.kanji path.s { fill:none; stroke:var(--ink); stroke-width:5;
-                stroke-linecap:round; stroke-linejoin:round; }
+.kanji path { fill:none; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+.kanji path.base { stroke:var(--faint); }    /* 밑글씨 — 항상 보인다 */
+.kanji path.s { stroke:var(--ink); }         /* 그려지는 획 */
 /* 획 긋기 — JS 가 획 길이(--len)와 차례(animation)를 넣어 주면 돈다.
    JS 가 안 돌거나 애니메이션이 막혀도 기본 상태가 '다 그려진 글자' 라 빈칸이 되지 않는다.
    (transition 방식은 파이어폭스에서 시작이 안 돼 글자가 사라졌다 — 2026-09-19) */
