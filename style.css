@@ -88,16 +88,18 @@ footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
   .mean::before { content:" — "; color:var(--soft); }
   .ex { font-size:8.5pt; margin-top:0; }
 
+  /* 한자는 2단으로 흘린다 — 글자 수가 많은 날(6자 이상)도 한 장에 들어오게 */
+  .hanja-wrap { columns:2; column-gap:7mm; }
   .hanja { margin-bottom:7px; break-inside:avoid; }
-  .hanja .head { font-size:8.5pt; margin-bottom:3px; }
-  .card { padding:6px 8px; margin-bottom:5px; border-radius:7px; break-inside:avoid; }
-  .top { gap:10px; }
-  .kanji { width:52px; height:52px; border-radius:5px; }
-  .meta .ch { font-size:14pt; line-height:1.1; }
-  .meta .desc { font-size:8.5pt; }
+  .hanja .head { font-size:8pt; margin-bottom:3px; }
+  .card { padding:5px 7px; margin-bottom:4px; border-radius:6px; break-inside:avoid; }
+  .top { gap:8px; }
+  .kanji { width:44px; height:44px; border-radius:4px; }
+  .meta .ch { font-size:13pt; line-height:1.1; }
+  .meta .desc { font-size:8pt; }
   .meta .cnt { display:none; }
-  .steps { gap:3px; margin-top:6px; padding-top:5px; }
-  .step { width:29px; height:29px; border-radius:4px; }
-  .num { font-size:6.5px; top:0; left:3px; }
+  .steps { gap:2.5px; margin-top:5px; padding-top:4px; }
+  .step { width:26px; height:26px; border-radius:3px; }
+  .num { font-size:6px; top:0; left:2px; }
   .review div { font-size:8.5pt; margin-bottom:1px; }
 }
