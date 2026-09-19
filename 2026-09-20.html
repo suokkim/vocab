@@ -28,21 +28,46 @@
 </div>
 <script>
 // 획 하나씩 순서대로 그린다. 길이가 제각각이라 getTotalLength 로 시간을 맞춘다.
+//
+// 글자는 기본적으로 '다 그려진' 상태다. 애니메이션은 거기서 잠깐 지웠다가 다시 그리는 것.
+// 그래야 JS 가 안 돌거나 중간에 멈춰도 글자가 사라지지 않는다.
+// (파이어폭스에서 큰 글자가 빈칸으로 나오던 원인 — 강제 리플로우로는 전환이 시작되지 않아
+//  획이 지워진 상태에 머물렀다. rAF 두 번으로 바꾸고 기본값을 '보임' 으로 뒤집었다.)
 function play(card) {
-  const paths = card.querySelectorAll('.kanji path.s');
-  let delay = 0;
-  paths.forEach(p => {
-    const len = p.getTotalLength();
-    const dur = Math.max(0.25, len / 120);
+  const paths = Array.from(card.querySelectorAll('.kanji path.s'));
+  const lens = paths.map(p => p.getTotalLength());
+  if (lens.some(l => !l)) return;          // 아직 배치 전이면 건드리지 않는다 (글자는 보인 채로)
+
+  paths.forEach((p, i) => {
     p.style.transition = 'none';
-    p.style.strokeDasharray = len;
-    p.style.strokeDashoffset = len;
-    void p.getBoundingClientRect();
-    p.style.transition = `stroke-dashoffset ${dur}s linear ${delay}s`;
+    p.style.strokeDasharray = lens[i];
+    p.style.strokeDashoffset = lens[i];
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    let delay = 0;
+    paths.forEach((p, i) => {
+      const dur = Math.max(0.25, lens[i] / 120);
+      p.style.transition = 'stroke-dashoffset ' + dur + 's linear ' + delay + 's';
+      p.style.strokeDashoffset = 0;
+      delay += dur + 0.12;
+    });
+  }));
+}
+
+// 인쇄 직전에는 애니메이션 상태를 지운다 — 중간에 인쇄하면 획이 반만 나온다
+function settle() {
+  document.querySelectorAll('.kanji path.s').forEach(p => {
+    p.style.transition = 'none';
+    p.style.strokeDasharray = 'none';
     p.style.strokeDashoffset = 0;
-    delay += dur + 0.12;
   });
 }
-document.querySelectorAll('.card').forEach(play);
+window.addEventListener('beforeprint', settle);
+
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.card').forEach(play);
+  });
+}
 </script>
 </body></html>
