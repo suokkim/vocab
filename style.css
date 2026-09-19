@@ -66,4 +66,38 @@ ul.days a { text-decoration:none; font-weight:600; }
 ul.days .peek { color:var(--soft); font-size:14px; font-weight:400; }
 footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
          font-size:13px; color:var(--soft); }
-@media print { button, footer { display:none; } }
+
+/* ── 인쇄: A4 한 장에 들어가게 ──────────────────────────────
+   화면에서는 여유롭게, 종이에서는 빽빽하게. 글씨·칸·여백을 한꺼번에 줄이고
+   단어는 '단어 — 뜻' 한 줄로 접는다. 카드는 쪽 경계에서 잘리지 않게 묶는다. */
+@media print {
+  @page { size: A4 portrait; margin: 10mm; }
+  :root { --ink:#000; --bg:#fff; --line:#bbb; --soft:#333;
+          --faint:#ccc; --accent:#c0392b; --card:#fff; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { padding:0; font-size:9.5pt; line-height:1.45; }
+  .page { max-width:none; }
+  button, footer, .crumb { display:none; }
+  h1 { font-size:13pt; margin-bottom:8px; }
+  h2 { font-size:9pt; margin:9px 0 5px; padding-bottom:3px; }
+
+  ol.words li { padding:2.5px 0; break-inside:avoid; }
+  .w, .mean { display:inline; }
+  .w { font-size:10.5pt; }
+  .w .hz { font-size:9.5pt; }
+  .mean::before { content:" — "; color:var(--soft); }
+  .ex { font-size:8.5pt; margin-top:0; }
+
+  .hanja { margin-bottom:7px; break-inside:avoid; }
+  .hanja .head { font-size:8.5pt; margin-bottom:3px; }
+  .card { padding:6px 8px; margin-bottom:5px; border-radius:7px; break-inside:avoid; }
+  .top { gap:10px; }
+  .kanji { width:52px; height:52px; border-radius:5px; }
+  .meta .ch { font-size:14pt; line-height:1.1; }
+  .meta .desc { font-size:8.5pt; }
+  .meta .cnt { display:none; }
+  .steps { gap:3px; margin-top:6px; padding-top:5px; }
+  .step { width:29px; height:29px; border-radius:4px; }
+  .num { font-size:6.5px; top:0; left:3px; }
+  .review div { font-size:8.5pt; margin-bottom:1px; }
+}
