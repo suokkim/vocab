@@ -102,4 +102,6 @@ footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
   .step { width:30px; height:30px; border-radius:3px; }
   .num { font-size:6.5px; top:0; left:2.5px; }
   .review div { font-size:8.5pt; margin-bottom:1px; }
+  /* 애니메이션 도중에 인쇄해도 큰 글자가 온전히 나오게 */
+  .kanji path.s { stroke-dasharray:none !important; stroke-dashoffset:0 !important; }
 }
