@@ -15,6 +15,12 @@
 <!-- 날짜 순서는 그대로 두고, 오늘 줄이 화면 맨 위에 오도록 스크롤만 한다 (위=내일, 아래=어제) -->
 <script>
 const t = document.querySelector(`.days a[href="${new Date().toLocaleDateString('sv')}.html"]`)?.closest('li');
-if (t) { t.classList.add('today'); t.scrollIntoView(); }
+if (t) {
+  t.classList.add('today');
+  t.scrollIntoView();
+  // 오늘이 목록 끝쪽이면 더 내려갈 여지가 없다 — 모자란 만큼 아래에 빈 자리를 준다
+  const gap = t.getBoundingClientRect().top - 12;
+  if (gap > 0) { t.parentNode.style.paddingBottom = gap + 'px'; t.scrollIntoView(); }
+}
 </script>
 </body></html>
