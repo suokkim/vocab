@@ -93,28 +93,23 @@ function play(card) {
   const lens = paths.map(p => p.getTotalLength());
   if (lens.some(l => !l)) return;          // 아직 배치 전이면 건드리지 않는다 (글자는 보인 채로)
 
+  paths.forEach(p => { p.style.animation = 'none'; });
+  void card.offsetWidth;                   // 되감기
+  let delay = 0;
   paths.forEach((p, i) => {
-    p.style.transition = 'none';
-    p.style.strokeDasharray = lens[i];
-    p.style.strokeDashoffset = lens[i];
+    const dur = Math.max(0.25, lens[i] / 120);
+    p.style.setProperty('--len', lens[i]);
+    p.style.animation = 'draw ' + dur + 's linear ' + delay + 's both';
+    delay += dur + 0.12;
   });
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    let delay = 0;
-    paths.forEach((p, i) => {
-      const dur = Math.max(0.25, lens[i] / 120);
-      p.style.transition = 'stroke-dashoffset ' + dur + 's linear ' + delay + 's';
-      p.style.strokeDashoffset = 0;
-      delay += dur + 0.12;
-    });
-  }));
 }
 
-// 인쇄 직전에는 애니메이션 상태를 지운다 — 중간에 인쇄하면 획이 반만 나온다
+// 인쇄 직전에는 애니메이션을 걷어낸다 — 그리는 도중에 인쇄하면 획이 반만 나온다
 function settle() {
   document.querySelectorAll('.kanji path.s').forEach(p => {
-    p.style.transition = 'none';
+    p.style.animation = 'none';
     p.style.strokeDasharray = 'none';
-    p.style.strokeDashoffset = 0;
+    p.style.strokeDashoffset = '0';
   });
 }
 window.addEventListener('beforeprint', settle);
