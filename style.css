@@ -25,6 +25,10 @@ ol.words li:last-child { border-bottom:0; }
 .w .hz { color:var(--soft); font-weight:400; font-size:16px; }
 .mean { margin-top:1px; }
 .ex { color:var(--soft); font-size:15px; margin-top:3px; }
+.more { color:var(--soft); font-size:14px; margin-top:2px; }
+.more .ant { color:var(--ink); }
+.hanja .mn { font-size:15px; margin:-4px 0 10px; }
+.hanja .mn b { color:var(--accent); font-weight:600; }
 
 /* 한자 */
 .hanja { margin-bottom:26px; }
@@ -97,6 +101,8 @@ footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
   .w .hz { font-size:9.5pt; }
   .mean::before { content:" — "; color:var(--soft); }
   .ex { font-size:8.5pt; margin-top:0; }
+  .more { font-size:8pt; margin-top:0; }
+  .hanja .mn { font-size:8pt; margin:0 0 3px; }
 
   /* 한자는 2단으로 흘린다 — 글자 수가 많은 날(6자 이상)도 한 장에 들어오게 */
   .hanja-wrap { columns:2; column-gap:7mm; }
@@ -109,7 +115,7 @@ footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
   .meta .desc { font-size:8pt; }
   .meta .cnt { display:none; }
   .steps { gap:3px; margin-top:5px; padding-top:4px; }
-  .step { width:30px; height:30px; border-radius:3px; }
+  .step { width:27px; height:27px; border-radius:3px; }   /* 30→27: 연상·유래 줄이 늘어난 몫 (09-29) */
   .num { font-size:6.5px; top:0; left:2.5px; }
   .review div { font-size:8.5pt; margin-bottom:1px; }
   /* 애니메이션 도중에 인쇄해도 큰 글자가 온전히 나오게 */
