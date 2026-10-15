@@ -30,17 +30,23 @@ ol.words li:last-child { border-bottom:0; }
 .hanja .mn { font-size:15px; margin:-4px 0 10px; }
 .hanja .mn b { color:var(--accent); font-weight:600; }
 
-/* 한자 */
-.hanja { margin-bottom:26px; }
-.hanja .head { font-size:15px; color:var(--soft); margin-bottom:10px; }
-.card { border:1px solid var(--line); border-radius:14px; background:var(--card);
-        padding:16px 18px; margin-bottom:14px; }
-.top { display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
-.kanji { width:128px; height:128px; flex:0 0 auto;
+/* 한자 — 어휘 바로 아래, 통한자 순서 (2026-10-15)
+   글자·급수·부품 / 문제 / 답 / 그림 / 훈음 / 예시어 / 획순 */
+.hanja { margin-top:10px; }
+.card { padding:14px 0 6px; border-top:1px dashed var(--line); }
+.hd .ch { font-size:34px; line-height:1.1; color:var(--hz); }
+.hd .grade { font-size:13px; color:var(--soft); }
+.hd .parts { font-size:13px; margin-left:12px; }
+.hd .pt { margin-right:10px; }
+.card .q { font-size:18px; margin-top:6px; }
+.card .a { font-size:15px; color:var(--soft); }
+.card .a b { color:var(--ink); font-weight:500; }
+.pic { display:flex; gap:14px; align-items:flex-end; margin:10px 0 6px; }
+.kanji { width:140px; height:140px; flex:0 0 auto;
          border:1px solid var(--line); border-radius:10px; background:var(--bg); }
 .kanji path { fill:none; stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
 .kanji path.base { stroke:var(--faint); }    /* 밑글씨 — 항상 보인다 */
-.kanji path.s { stroke:var(--ink); }         /* 그려지는 획 */
+.kanji path.s { stroke:var(--ink); }         /* 그려지는 획 (부품 색은 아래 .p0~) */
 /* 획 긋기 — JS 가 획 길이(--len)와 차례(animation)를 넣어 주면 돈다.
    JS 가 안 돌거나 애니메이션이 막혀도 기본 상태가 '다 그려진 글자' 라 빈칸이 되지 않는다.
    (transition 방식은 파이어폭스에서 시작이 안 돼 글자가 사라졌다 — 2026-09-19) */
@@ -48,35 +54,27 @@ ol.words li:last-child { border-bottom:0; }
   from { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
   to   { stroke-dasharray: var(--len); stroke-dashoffset: 0; }
 }
-.meta .ch { font-size:30px; line-height:1.2; color:var(--hz); }
-.meta .grade { font-size:12px; color:var(--soft); margin-left:6px; vertical-align:4px; }
-.meta .hun { font-size:17px; }
-.meta .hun em, .exw em { font-style:normal; color:var(--hz); }
-/* 문제·답·예시어 — 통한자(tonghanja.com) 방식: 핵심어만 진하게, 나머지는 흐리게 (2026-10-15) */
-.quiz { margin-top:12px; }
-.quiz .q { font-size:17px; }
-.quiz .a { font-size:15px; color:var(--soft); }
-.quiz .a b { color:var(--ink); font-weight:500; }
-.quiz .exw { font-size:15px; color:var(--soft); margin-top:2px; }
-.meta .desc { font-size:14px; color:var(--soft); }
-.meta .cnt { font-size:13px; color:var(--soft); opacity:.75; margin-top:2px; }
-button { margin-top:9px; font:inherit; font-size:13px; padding:4px 13px;
+/* 부품 색 — 그림의 획과 머리줄 부품 이름이 같은 색 */
+.kanji path.p0 { stroke:#e8590c; } .pt.p0 { color:#e8590c; }
+.kanji path.p1 { stroke:#2f9e44; } .pt.p1 { color:#2f9e44; }
+.kanji path.p2 { stroke:#7048e8; } .pt.p2 { color:#7048e8; }
+.kanji path.p3 { stroke:#d6336c; } .pt.p3 { color:#d6336c; }
+.pic-side .note { font-size:14px; color:var(--soft); }
+.pic-side .cnt { font-size:13px; color:var(--soft); opacity:.75; }
+.card .hun { font-size:18px; }
+.card .hun em, .exw em { font-style:normal; color:var(--hz); }
+.exw { font-size:15px; color:var(--soft); margin-top:2px; }
+button { margin-top:6px; font:inherit; font-size:13px; padding:4px 13px;
          border:1px solid var(--line); border-radius:999px;
          background:transparent; color:inherit; cursor:pointer; }
 button:hover { background:var(--line); }
 
-/* 획별 칸 — 한 칸이 한 획 */
-.steps { display:flex; flex-wrap:wrap; gap:7px; margin-top:15px;
-         padding-top:13px; border-top:1px dashed var(--line); }
-.step { position:relative; width:58px; height:58px; border:1px solid var(--line);
-        border-radius:8px; background:var(--bg); }
-.step svg { width:100%; height:100%; display:block; }
-.step path.done { fill:none; stroke:var(--faint); stroke-width:5;
-                  stroke-linecap:round; stroke-linejoin:round; }
-.step path.cur { fill:none; stroke:var(--accent); stroke-width:6.5;
-                 stroke-linecap:round; stroke-linejoin:round; }
-.num { position:absolute; top:1px; left:5px; font-size:11px; color:var(--soft);
-       font-variant-numeric:tabular-nums; }
+/* 획순 — 글자 전체를 흐리게 깔고 그 차례까지 그은 획만 진하게. 칸·번호 없음 */
+.steps { display:flex; flex-wrap:wrap; gap:2px; margin-top:8px; }
+.step { width:40px; height:40px; }
+.step path { fill:none; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; }
+.step path.on { stroke:var(--ink); }
+.step path.off { stroke:var(--faint); opacity:.6; }
 
 /* 복습·목차 */
 .review div { margin-bottom:4px; }
@@ -113,29 +111,25 @@ footer { margin-top:44px; padding-top:14px; border-top:1px solid var(--line);
   .more { font-size:8pt; margin-top:0; }
   .hanja .mn { font-size:8pt; margin:0 0 3px; }
 
-  /* 한자는 2단으로 흘린다 — 글자 수가 많은 날(6자 이상)도 한 장에 들어오게 */
-  .hanja-wrap { columns:2; column-gap:7mm; }
-  .hanja { margin-bottom:7px; }   /* 단어 묶음은 단 경계에서 나뉘어도 된다 — 카드만 안 자른다 (10-15) */
-  .hanja .head { font-size:8pt; margin-bottom:3px; }
-  .card { padding:5px 7px; margin-bottom:4px; border-radius:6px; break-inside:avoid; }
-  .top { gap:8px; }
-  .kanji { width:44px; height:44px; border-radius:4px; }   /* 50→44: 문제·답·예시어 줄 몫 (10-15) */
-  .meta .ch { font-size:14pt; line-height:1.1; }
-  .meta .desc { font-size:8pt; }
-  .meta .hun { font-size:9pt; }
-  .meta .grade { font-size:6.5pt; vertical-align:2px; }
-  .quiz { margin-top:2px; line-height:1.3; }
-  .quiz .q { font-size:8.5pt; }
-  .quiz .a, .quiz .exw { font-size:8pt; }
-  .quiz .q, .quiz .a { display:inline; }   /* 문제·답을 한 줄로 이어 흘린다 — 한자 많은 날(09-18) 1쪽 유지 */
-  .quiz .q::after { content:" "; }
-  .card:has(.quiz) .meta .desc { display:none; }
-  /* 단어 풀이 머리줄('명징 明澄 = 明 … + 澄 … → …')은 카드의 훈음·문제와 겹친다 — 종이에선 한 줄로 자른다 (09-18 1쪽 유지) */
-  .hanja:has(.quiz) .head { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }   /* 문제에 부품(뜻·한자)이 이미 있어 종이에선 겹친다 */
-  .meta .cnt { display:none; }
-  .steps { gap:3px; margin-top:5px; padding-top:4px; }
-  .step { width:27px; height:27px; border-radius:3px; }   /* 30→27: 연상·유래 줄이 늘어난 몫 (09-29) */
-  .num { font-size:6.5px; top:0; left:2.5px; }
+  /* 한자 카드는 어휘 아래 2열 — 그림은 왼쪽에 작게, 문제·답은 한 줄로 이어 흘린다 */
+  .hanja { margin-top:2px; }
+  .cards { display:grid; grid-template-columns:1fr 1fr; gap:2px 6mm; }
+  .card { padding:3px 0 2px; border-top:1px dotted var(--line); break-inside:avoid; }
+  .hd .ch { font-size:13pt; }
+  .hd .grade { font-size:6.5pt; }
+  .hd .parts { font-size:7pt; margin-left:5px; }
+  .hd .pt { margin-right:5px; }
+  .card .q, .card .a { display:inline; line-height:1.3; }
+  .card .q { font-size:8pt; margin:0; }
+  .card .q::after { content:" "; }
+  .card .a { font-size:7.5pt; }
+  .pic { float:left; margin:2px 6px 0 0; }
+  .pic-side { display:none; }
+  .kanji { width:40px; height:40px; border-radius:4px; }
+  .card .hun { font-size:8.5pt; }
+  .exw { font-size:7.5pt; margin-top:0; line-height:1.3; }
+  .steps { clear:both; gap:0; margin-top:2px; }
+  .step { width:17px; height:17px; }
   .review div { font-size:8.5pt; margin-bottom:1px; }
   /* 애니메이션 도중에 인쇄해도 큰 글자가 온전히 나오게 */
   .kanji path.s { stroke-dasharray:none !important; stroke-dashoffset:0 !important; }
