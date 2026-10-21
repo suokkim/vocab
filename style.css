@@ -50,7 +50,7 @@ ol.words li:last-child { border-bottom:0; }
 /* 획순 — 글자 전체를 흐리게 깔고 그 차례까지 그은 획만 진하게. 칸·번호 없음 */
 .steps { display:flex; flex-wrap:wrap; gap:2px; margin-top:8px; }
 .step { width:40px; height:40px; }
-.step path { fill:none; stroke-width:7; stroke-linecap:round; stroke-linejoin:round; }
+.step path { fill:none; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
 .step path.on { stroke:var(--ink); }
 .step path.off { stroke:var(--faint); opacity:.6; }
 
